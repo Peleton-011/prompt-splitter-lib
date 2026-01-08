@@ -1,0 +1,19 @@
+[
+	[
+		{
+			"name": "Catalan",
+			"nativeName": "Català",
+			"dir": "ltr"
+		},
+		{
+			"name": "English",
+			"nativeName": "English",
+			"dir": "ltr"
+		},
+		{
+			"name": "Spanish",
+			"nativeName": "Español",
+			"dir": "ltr"
+		}
+	]
+]
