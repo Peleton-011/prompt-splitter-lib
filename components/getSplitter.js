@@ -72,7 +72,7 @@ const getSplitter = () => {
 	textarea.placeholder = "Enter text to split";
 	textarea.value = text;
 	textarea.addEventListener("change", (e) => {
-		setText(e.target.value);
+		text = String(e.target.value);
 	});
 	textarea.rows = 10;
 	textarea.cols = 50;
