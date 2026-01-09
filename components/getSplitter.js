@@ -22,10 +22,9 @@ import getCopyButton from "./getCopyButton";
 // };
 
 const getSplitter = () => {
-	const chunks = [];
 	let text = "";
 	const chunkSize = 15000;
-	let selectedLanguage = "es"; // Default set to Spanish
+	let selectedLanguage = "";
 
 	let promptList = promptsImport.es; // Set default prompts to Spanish
 
@@ -40,10 +39,12 @@ const getSplitter = () => {
 		}
 	}
 
+	setSelectedLanguage("es"); // Default set to Spanish
+
 	function handleSplitText() {
 		const chunks = splitText(text, chunkSize, promptList);
 
-		populateCopyButtons();
+		populateCopyButtons(chunks);
 
 		if (chunks.length < 2) {
 			document.getElementById("tooShort").style.display = "block";
@@ -52,8 +53,9 @@ const getSplitter = () => {
 		}
 	}
 
-	function populateCopyButtons() {
+	function populateCopyButtons(chunks = []) {
 		const copyButtons = document.getElementById("copyButtons");
+		if (copyButtons) copyButtons.innerHTML = "";
 		chunks.forEach((chunk, index) => {
 			const copyButton = getCopyButton(chunk, `Chunk ${index + 1}`);
 			copyButtons.appendChild(copyButton);
@@ -71,8 +73,9 @@ const getSplitter = () => {
 	const textarea = document.createElement("textarea");
 	textarea.placeholder = "Enter text to split";
 	textarea.value = text;
-	textarea.addEventListener("change", (e) => {
+	textarea.addEventListener("input", (e) => {
 		text = String(e.target.value);
+		document.getElementById("splitButton").disabled = Boolean(!text);
 	});
 	textarea.rows = 10;
 	textarea.cols = 50;
@@ -88,10 +91,12 @@ const getSplitter = () => {
 		setSelectedLanguage(e.target.value);
 	});
 
+	console.log(languagesImport);
 	languagesImport.forEach((lang, index) => {
+		console.log(lang);
 		const option = document.createElement("option");
 		option.value = lang.code;
-		option.textContent = lang.native;
+		option.textContent = lang.nativeName;
 		languageSelect.appendChild(option);
 	});
 
@@ -105,6 +110,7 @@ const getSplitter = () => {
 	splitter.appendChild(languageSelector);
 
 	const splitButton = document.createElement("button");
+	splitButton.id = "splitButton";
 	splitButton.textContent = "Split Text";
 	splitButton.disabled = !text;
 	splitButton.addEventListener("click", handleSplitText);
@@ -115,6 +121,7 @@ const getSplitter = () => {
 	tooShort.textContent =
 		"Text is too short to split! You could have sent as one chunk! 😂";
 	tooShort.style.display = "none";
+	tooShort.style.marginTop = "20px";
 	splitter.appendChild(tooShort);
 
 	const copyButtons = document.createElement("div");

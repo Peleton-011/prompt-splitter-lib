@@ -1,19 +1,17 @@
 [
-	[
-		{
-			"name": "Catalan",
-			"nativeName": "Català",
-			"dir": "ltr"
-		},
-		{
-			"name": "English",
-			"nativeName": "English",
-			"dir": "ltr"
-		},
-		{
-			"name": "Spanish",
-			"nativeName": "Español",
-			"dir": "ltr"
-		}
-	]
+    	{
+		"name": "Spanish",
+		"nativeName": "Español",
+		"code": "es"
+	},
+	{
+		"name": "Catalan",
+		"nativeName": "Català",
+		"code": "ca"
+	},
+	{
+		"name": "English",
+		"nativeName": "English",
+		"code": "en"
+	}
 ]
